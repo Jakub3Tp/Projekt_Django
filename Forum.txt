@@ -1,0 +1,46 @@
+Mini Forum Konsol
+
+Zakres projektu
+Mini Forum Konsol to aplikacja która ma na celu umożliwienie użytkownikom tworzenie i przeglądanie kart opisujących historyczne oraz współczesne konsole do gier. Do głównych funkcji zalicza się:
+1. Rejestrację i logowanie użytkowników – aby umożliwiać personalizację treści i tworzenie kart przez zarejestrowanych użytkowników.
+2. Tworzenie kart konsol – użytkownicy mogą dodawać nowe karty zawierające nazwę konsoli, datę premiery, producenta, zdjęcie oraz opis techniczny.
+3. Przeglądanie i wyszukiwanie kart – aplikacja umożliwi filtrowanie konsol według producenta, daty premiery lub innych cech.
+4. Edycję i usuwanie kart – autorzy kart mogą je edytować lub usuwać.
+5. System komentarzy i ocen – użytkownicy mogą komentować oraz oceniać poszczególne karty (opcjonalne rozszerzenie).
+Wymagania techniczne:
+1.	Backend:
+o	Django
+o	Python
+2.	Frontend:
+o	HTML, CSS, JavaScript
+o	Bootstrap
+Opis bazodanowy (modele)
+
+Model Użytkownik (User)
+Bazuje na wbudowanym modelu `User` z Django, umożliwiając zarządzanie rejestracją i logowaniem.
+
+Model Konsola (Console)
+- id (Primary Key) – automatyczne pole ID.
+- nazwa (CharField) – nazwa konsoli, maks. 255 znaków.
+- producent (CharField) – producent konsoli, maks. 255 znaków.
+- data_premiery (DateField) – data premiery konsoli.
+- opis (TextField) – szczegółowy opis konsoli.
+- zdjecie (ImageField) – zdjęcie konsoli (przechowywane w katalogu medialnym).
+- autor (ForeignKey) – odniesienie do modelu `User`, oznaczające twórcę karty.
+- data_utworzenia (DateTimeField) – automatyczna data utworzenia karty.
+- data_aktualizacji (DateTimeField) – automatyczna data ostatniej aktualizacji.
+
+Model Komentarz (Comment) – (opcjonalny)
+- id (Primary Key) – automatyczne pole ID.
+- konsola (ForeignKey) – odniesienie do modelu `Console`.
+- autor (ForeignKey) – odniesienie do modelu `User`.
+- tresc (TextField) – treść komentarza.
+- data_utworzenia (DateTimeField) – automatyczna data dodania komentarza.
+
+Model Ocena (Rating) – (opcjonalny)
+- id (Primary Key) – automatyczne pole ID.
+- konsola (ForeignKey) – odniesienie do modelu `Console`.
+- autor (ForeignKey) – odniesienie do modelu `User`.
+- ocena (IntegerField) – ocena w skali 1-5.
+- data_utworzenia (DateTimeField) – automatyczna data dodania oceny.
+
